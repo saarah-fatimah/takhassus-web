@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Report Card Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f9fc;
+      text-align: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border: 2px solid #333;
+      border-radius: 10px;
+      width: 400px;
+      margin: auto;
+      padding: 20px;
+      box-shadow: 0 0 10px gray;
+      text-align: left;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #2c3e50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    table, th, td {
+      border: 1px solid #555;
+    }
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+    .highlight {
+      font-weight: bold;
+      color: darkblue;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📋 Report Card Generator</h1>
+  <div id="reportCard" class="card"></div>
+
+  <script>
+    // 📝 User Input Stage
+    const studentName = prompt("Enter Student Name:");
+    const className = prompt("Enter Class Name:");
+
+    const subjects = [];
+    const marks = [];
+
+    for (let i = 0; i < 3; i++) {
+      let subject = prompt(`Enter Subject ${i+1} Name:`);
+      let mark = parseFloat(prompt(`Enter Marks for ${subject}:`));
+      subjects.push(subject);
+      marks.push(mark);
+    }
+
+    // ⚡ Processing Stage
+    const total = marks.reduce((a, b) => a + b, 0);
+    const average = total / marks.length;
+
+    let grade;
+    if (average >= 80) grade = "A";
+    else if (average >= 70) grade = "B";
+    else if (average >= 60) grade = "C";
+    else if (average >= 50) grade = "D";
+    else grade = "F";
+
+    // 📄 Output Stage
+    let reportHTML = `
+      <h2>Report Card</h2>
+      <p><span class="highlight">Name:</span> ${studentName}</p>
+      <p><span class="highlight">Class:</span> ${className}</p>
+
+      <table>
+        <tr>
+          <th>Subject</th>
+          <th>Marks</th>
+        </tr>`;
+
+    for (let i = 0; i < subjects.length; i++) {
+      reportHTML += `
+        <tr>
+          <td>${subjects[i]}</td>
+          <td>${marks[i]}</td>
+        </tr>`;
+    }
+
+    reportHTML += `
+      </table>
+      <p><span class="highlight">Total Marks:</span> ${total}</p>
+      <p><span class="highlight">Average:</span> ${average.toFixed(2)}</p>
+      <p><span class="highlight">Grade:</span> ${grade}</p>
+    `;
+
+    document.getElementById("reportCard").innerHTML = reportHTML;
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task</title>
+</head>
+<body>
+  <h1>REPORT CARD GENERATOR</h1>
+
+  <!-- user input stage -->
+  <input type="text" placeholder="Name" id="name" />
+  <input type="text" placeholder="Class" id="class" />
+  <input type="text" placeholder="Subject" id="sub1" />
+  <input type="number" placeholder="Marks" id="marks1"/>
+  <input type="text" placeholder="Subject" id="sub2" />
+  <input type="number" placeholder="Marks" id="marks2"/>
+  <input type="text" placeholder="Subject" id="sub3" />
+  <input type="number" placeholder="Marks" id="marks3"/>
+  <button onclick="printCard()">Print Card</button>
+
+  <!-- Report Card Output -->
+  <div id="reportcard"></div>
+
+  <script>
+    function printCard() {
+      // Get inputs
+      let storeName = document.getElementById("name").value;
+      let storeClass = document.getElementById("class").value;
+
+      let sub1 = document.getElementById("sub1").value;
+      let marks1 = Number(document.getElementById("marks1").value);
+
+      let sub2 = document.getElementById("sub2").value;
+      let marks2 = Number(document.getElementById("marks2").value);
+
+      let sub3 = document.getElementById("sub3").value;
+      let marks3 = Number(document.getElementById("marks3").value);
+
+      // Processing
+      let totalMarks = Number(marks1) +Number(marks2) +Number(marks3);
+      let average = totalMarks / 3;
+      let grade;
+
+      if (average >= 90) {
+        grade = "A";
+      } else if (average > 70 && average < 90) {
+        grade = "B";
+      } else if (average > 60 && average <= 70) {
+        grade = "C";
+      } else if (average >= 40 && average <= 60) {
+        grade = "D";
+      } else {
+        grade = "F";
+      }
+
+      // Output Report Card
+      document.getElementById("reportcard").innerHTML = `
+        <h2>Report Card</h2>
+        <p><strong>Name:</strong> ${storeName}</p>
+        <p><strong>Class:</strong> ${storeClass}</p>
+        <p><strong>${sub1}:</strong> ${marks1}</p>
+        <p><strong>${sub2}:</strong> ${marks2}</p>
+        <p><strong>${sub3}:</strong> ${marks3}</p>
+        <p><strong>Total Marks:</strong> ${totalMarks}</p>
+        <p><strong>Average:</strong> ${average.toFixed(2)}</p>
+        <p><strong>Grade:</strong> ${grade}</p>
+      `;
+    }
+  </script>
+</body>
+</html>
